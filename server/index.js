@@ -1,5 +1,18 @@
 const http = require('http')
 const path = require('path')
+const firebase = require('firebase/app');
+require('firebase/auth');
+require('firebase/database');
+
+var appf = firebase.initializeApp({ apiKey: "AIzaSyDF3lqZQbjs-xEBl7QpO9TYooS2oEfeoXE",
+authDomain: "tweet-rstats.firebaseapp.com",
+databaseURL: "https://tweet-rstats-default-rtdb.firebaseio.com",
+projectId: "tweet-rstats",
+storageBucket: "tweet-rstats.appspot.com",
+messagingSenderId: "1038502402572",
+appId: "1:1038502402572:web:e0a69efb06b8eefdbeec29",
+measurementId: "G-H6QZE6547L"});
+
 const express = require('express')
 const socketIo = require('socket.io')
 const needle = require('needle')
@@ -83,7 +96,15 @@ function streamTweets(socket) {
     try {
       const json = JSON.parse(data)
       console.log(json)
+      var kpliref = firebase.database().ref('gets/');
+      var data={
+        id:json.data.id,
+        text: json.data.text,
+        username: `@${json.includes.users[0].username}`
+   }
+       kpliref.push(data)
       socket.emit('tweet', json)
+      
     } catch (error) {}
   })
 
