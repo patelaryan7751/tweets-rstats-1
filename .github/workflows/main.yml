@@ -19,5 +19,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: npm start
+     - name: Ping URL (JavaScript action)
+  # You may pin to the exact commit or the version.
+  # uses: soul-wish/ping-url-javascript-action@a859fd903f27430ca566fbe94da9ce2c5e0c04d9
+       uses: soul-wish/ping-url-javascript-action@v1.2
+       with:
+        # URL to ping
+        url: https://github.com/
